@@ -39,9 +39,9 @@ class ProductSchema(ma.Schema):
         fields = ('id', 'name', 'description', 'price', 'qty')
 
 
-# Init schema
-# product_schema = ProductSchema(strict=True)
-# products_schema = ProductSchema(many=True, strict=True)
+
+product_schema = ProductSchema()
+products_schema = ProductSchema(many=True)
 
 # Create a Product
 
@@ -66,8 +66,10 @@ def add_product():
 @app.route('/product', methods=['GET'])
 def get_products():
     all_products = Product.query.all()
+    print('all_products========', all_products)
     result = products_schema.dump(all_products)
-    return jsonify(result.data)
+    print('------------',result)
+    return jsonify(result)
 
 # Get Single Products
 
